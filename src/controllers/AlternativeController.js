@@ -23,7 +23,8 @@ module.exports = {
                 });
             } catch(error) {
                 response.status(500);
-                response.send('It was not possible to insert the alternative, make sure the alternative is unique to this question.');
+                response.send(`Something went wrong, it was not possible to insert 
+                               the question. Make sure the alternative is unique to this question. \n Err: ${error}`);
             }
         } else {
             response.status(500);

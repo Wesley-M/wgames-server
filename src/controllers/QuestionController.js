@@ -9,7 +9,7 @@ module.exports = {
             scores = await connection('questions').select('*').where('gameId', params.gameId);
         } catch(error) {
             response.status(404);
-            response.send("gameId was not found!");
+            response.send("The game id was not found!");
         }
 
         return response.json(scores);
@@ -30,7 +30,8 @@ module.exports = {
                 });
             } catch(error) {
                 response.status(500);
-                response.send('It was not possible to insert the question, make sure the text is unique to this game.');
+                response.send(`Something went wrong, it was not possible to insert 
+                               the question. Make sure the text is unique to this game. \n Err: ${error}`);
             }
         } else {
             response.status(500);

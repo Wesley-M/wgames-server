@@ -7,11 +7,9 @@ module.exports = {
     },
 
     async addTagForGame(gameId, tag) {
-        await connection('tags').insert({
+        return await connection('tags').insert({
             gameId: gameId,
             name: tag
         });
-    
-        return response.json({ gameId });
     }
 }

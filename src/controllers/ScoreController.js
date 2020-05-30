@@ -12,11 +12,18 @@ module.exports = {
     async create(request, response) {
         const { gameId, name, score } = request.body;
         
-        let [id] = await connection('scores').insert({
-            gameId,
-            name,
-            score
-        });
+        let id;
+
+        try {
+            [id] = await connection('scores').insert({
+                gameId,
+                name,
+                score
+            });
+        } catch (error) {
+            response.status(500);
+            response.send(`Something went wrong, it was not possible to insert the score. \n Err: ${error}`);
+        }
 
         return response.json({ id });
     }
