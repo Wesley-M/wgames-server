@@ -19,8 +19,10 @@ module.exports = {
         const { gameId, text, subject, difficulty } = request.body;
         
         if (assertDifficulty(difficulty)) {
+            let id;
+
             try {
-                await connection('questions').insert({
+                [id] = await connection('questions').insert({
                     gameId: gameId,
                     text: text,
                     subject: subject.toLowerCase(),
@@ -30,8 +32,8 @@ module.exports = {
                 return response.status(500).send(`Something went wrong, it was not possible to insert 
                                                   the question. Make sure the text is unique to this game. \n Err: ${error}`);
             }
-            
-            return response.status(200).end();
+
+            return response.status(200).json({id});
         } else {
             return response.status(500).send('difficulty value from question is not in range [1, 5]');
         }
