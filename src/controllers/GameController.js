@@ -26,8 +26,6 @@ module.exports = {
                 return response.status(500).send(`Something went wrong, it was not possible to insert
                                                   the tags. \n Err: ${error}`);
             }
-
-            return response.json({ id });
         }).catch(error => {
             return response.json(error);
         })
