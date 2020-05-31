@@ -17,18 +17,34 @@ module.exports = {
     async create(request, response) {
         const { name, link, tags } = request.body;
 
-        connection('games').insert({ name, link }).then(res => {
+        try {
+            await connection('games').insert({ name, link });
+
             try {  
-                tags.forEach(async (tag) => { 
-                    await tagService.addTagForGame(id, tag) 
-                });
+                tags.forEach(async (tag) => await tagService.addTagForGame(id, tag));
             } catch(error) {
                 return response.status(500).send(`Something went wrong, it was not possible to insert
                                                   the tags. \n Err: ${error}`);
             }
+
             return response.status(200).end();
-        }).catch(error => {
-            return response.json(error);
-        })
+            
+        } catch (error) {
+            return response.status(500).send(`Something went wrong, it was not possible to insert
+                                              the game. Make sure link and name are unique. \n Err: ${error}`);
+        }
+
+        // connection('games').insert({ name, link }).then(res => {
+        //     try {  
+        //         tags.forEach(async (tag) => await tagService.addTagForGame(id, tag));
+        //     } catch(error) {
+        //         return response.status(500).send(`Something went wrong, it was not possible to insert
+        //                                           the tags. \n Err: ${error}`);
+        //     }
+        //     return response.status(200).end();
+        // }).catch(error => {
+        //     return response.status(500).send(`Something went wrong, it was not possible to insert
+        //                                       the game. Make sure link and name are unique. \n Err: ${error}`);
+        // });
     }
 }
