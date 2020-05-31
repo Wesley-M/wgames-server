@@ -22,8 +22,8 @@ module.exports = {
                     isCorrect
                 }, ['id']);
 
-                return response.json({ id });
-                
+                return response.json(id);
+
             } catch(error) {
                 response.status(500).send(`Something went wrong, it was not possible to insert 
                                            the question. Make sure the alternative is unique to 
