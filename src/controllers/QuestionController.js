@@ -27,7 +27,7 @@ module.exports = {
                     text: text,
                     subject: subject.toLowerCase(),
                     difficulty: difficulty
-                });
+                }, ['id']);
             } catch(error) {
                 return response.status(500).send(`Something went wrong, it was not possible to insert 
                                                   the question. Make sure the text is unique to this game. \n Err: ${error}`);
