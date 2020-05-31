@@ -33,7 +33,8 @@ module.exports = {
                                                   the question. Make sure the text is unique to this game. \n Err: ${error}`);
             }
 
-            return response.status(200).send(id);
+            return response.json(id);
+            
         } else {
             return response.status(500).send('difficulty value from question is not in range [1, 5]');
         }

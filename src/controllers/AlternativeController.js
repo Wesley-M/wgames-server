@@ -20,18 +20,18 @@ module.exports = {
                     questionId,
                     text,
                     isCorrect
-                });
+                }, ['id']);
+
+                return response.json({ id });
+                
             } catch(error) {
-                response.status(500);
-                response.send(`Something went wrong, it was not possible to insert 
-                               the question. Make sure the alternative is unique to this question. \n Err: ${error}`);
+                response.status(500).send(`Something went wrong, it was not possible to insert 
+                                           the question. Make sure the alternative is unique to 
+                                           this question. \n Err: ${error}`);
             }
         } else {
-            response.status(500);
-            response.send("Something is wrong with the isCorrect flag");
+            response.status(500).send("Something is wrong with the isCorrect flag");
         }
-
-        return response.json({ id });
     }
 }
 

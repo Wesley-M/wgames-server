@@ -19,12 +19,13 @@ module.exports = {
                 gameId,
                 name,
                 score
-            });
-        } catch (error) {
-            response.status(500);
-            response.send(`Something went wrong, it was not possible to insert the score. \n Err: ${error}`);
-        }
+            }, ['id']);
 
-        return response.json({ id });
+            return response.json({ id });
+            
+        } catch (error) {
+            return response.status(500).send(`Something went wrong, it was not possible to 
+                                              insert the score. \n Err: ${error}`);
+        }
     }
 }
