@@ -17,19 +17,19 @@ module.exports = {
     async create(request, response) {
         const { name, link, tags } = request.body;
 
-        let id;
+        let idOBJ;
 
         try {
-            [id] = await connection('games').insert({ name, link }, ['id']);
+            [idOBJ] = await connection('games').insert({ name, link }, ['id']);
 
             try {  
-                tags.forEach(async (tag) => await tagService.addTagForGame(id, tag));
+                tags.forEach(async (tag) => await tagService.addTagForGame(idOBJ.id, tag));
             } catch(error) {
                 return response.status(500).send(`Something went wrong, it was not possible to insert
                                                   the tags. \n Err: ${error}`);
             }
 
-            return response.json(id);
+            return response.json(idOBJ);
             
         } catch (error) {
             return response.status(500).send(`Something went wrong, it was not possible to insert
