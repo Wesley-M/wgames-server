@@ -29,7 +29,7 @@ module.exports = {
 
             return response.json({ id });
         }).catch(error => {
-            return response.json({error});
+            return response.json(error);
         })
     }
 }
