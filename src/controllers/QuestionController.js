@@ -22,7 +22,7 @@ module.exports = {
             let id;
 
             try {
-                id = await connection('questions').insert({
+                [id] = await connection('questions').insert({
                     gameId: gameId,
                     text: text,
                     subject: subject.toLowerCase(),
