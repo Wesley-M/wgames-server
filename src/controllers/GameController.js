@@ -22,12 +22,11 @@ module.exports = {
         try {  
             [id] = await connection('games').insert({ name, link });
             tags.forEach(async (tag) => await tagService.addTagForGame(id, tag));
+            return response.json({ id });
         } catch(error) {
             response.status(500);
             response.send(`Something went wrong, it was not possible to insert
                            the game. Make sure the name and link are unique. \n Err: ${error}`);
         }
-    
-        return response.json({ id });
     }
 }
