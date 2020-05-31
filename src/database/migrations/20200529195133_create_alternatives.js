@@ -7,7 +7,7 @@ exports.up = function(knex) {
     table.boolean('isCorrect').defaultTo(false);
 
     table.unique(['questionId', 'text']);
-    table.foreign('questionId').references('id').inTable('questions');
+    table.foreign('questionId').references('id').inTable('questions').onDelete('CASCADE');
   })
 };
   

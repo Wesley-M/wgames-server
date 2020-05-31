@@ -8,7 +8,7 @@ exports.up = function(knex) {
     table.enu('difficulty', [1, 2, 3, 4, 5]); 
 
     table.unique(['gameId', 'text']);
-    table.foreign('gameId').references('id').inTable('games'); 
+    table.foreign('gameId').references('id').inTable('games').onDelete('CASCADE'); 
   })
 };
   

@@ -6,7 +6,7 @@ exports.up = function(knex) {
     table.string('name').notNullable();
     table.integer('value').notNullable();
 
-    table.foreign('gameId').references('id').inTable('games');
+    table.foreign('gameId').references('id').inTable('games').onDelete('CASCADE');
   })
 };
 
