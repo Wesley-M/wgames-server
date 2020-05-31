@@ -23,7 +23,7 @@ module.exports = {
     
         // Getting all the current scores
         request.params.gameId = gameId;
-        let currentScores = await getScoresByGame(request, response);
+        let currentScores = await module.exports.getScoresByGame(request, response);
 
         // Checking whether there is a available slot to the score
         const availableSlot = (currentScores.length < SCORES_LIMIT);
