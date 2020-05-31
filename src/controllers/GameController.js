@@ -21,6 +21,8 @@ module.exports = {
 
         try {  
             [id] = await connection('games').insert({ name, link });
+
+            console.log(id);
         } catch(error) {
             return response.status(500).send(`Something went wrong, it was not possible to insert
                                               the game. Make sure the name and link are unique. 
