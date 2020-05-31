@@ -18,27 +18,23 @@ module.exports = {
     async create(request, response) {
         const { gameId, text, subject, difficulty } = request.body;
         
-        let id;
-        
         if (assertDifficulty(difficulty)) {
             try {
-                [id] = await connection('questions').insert({
+                await connection('questions').insert({
                     gameId: gameId,
                     text: text,
                     subject: subject.toLowerCase(),
                     difficulty: difficulty
                 });
             } catch(error) {
-                response.status(500);
-                response.send(`Something went wrong, it was not possible to insert 
-                               the question. Make sure the text is unique to this game. \n Err: ${error}`);
+                return response.status(500).send(`Something went wrong, it was not possible to insert 
+                                                  the question. Make sure the text is unique to this game. \n Err: ${error}`);
             }
+            
+            return response.status(200).end();
         } else {
-            response.status(500);
-            response.send('difficulty value from question is not in range [1, 5]');
+            return response.status(500).send('difficulty value from question is not in range [1, 5]');
         }
-
-        return response.json({ id });
     }
 }
 
