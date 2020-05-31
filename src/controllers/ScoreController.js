@@ -3,8 +3,13 @@ const connection = require('../database/connection')
 module.exports = {
     async getScoresByGame(request, response) {
         const params = request.params;
-        
-        const scores = await connection('scores').select('*').where('gameId', params.gameId);
+        let scores;
+
+        try {
+            scores = await connection('scores').select('*').where('gameId', params.gameId);
+        } catch(error) {
+            return response.status(404).send("The game id format is unsupported!");
+        }
 
         return response.json(scores);
     },

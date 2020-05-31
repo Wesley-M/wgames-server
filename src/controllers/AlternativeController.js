@@ -3,10 +3,15 @@ const connection = require('../database/connection')
 module.exports = {
     async getAlternativesByQuestion(request, response) {
         const params = request.params;
-        
-        const scores = await connection('alternatives').select('*').where('questionId', params.questionId);
+        let alternatives;
 
-        return response.json(scores);
+        try {
+            alternatives = await connection('alternatives').select('*').where('questionId', params.questionId);
+        } catch(error) {
+            return response.status(404).send("The question id format is unsupported!");
+        }
+
+        return response.json(alternatives);
     },
 
     async create(request, response) {

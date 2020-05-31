@@ -3,16 +3,15 @@ const connection = require('../database/connection')
 module.exports = {
     async getQuestionsByGame(request, response) {
         const params = request.params;
-        let scores;
+        let questions;
 
         try {
-            scores = await connection('questions').select('*').where('gameId', params.gameId);
+            questions = await connection('questions').select('*').where('gameId', params.gameId);
         } catch(error) {
-            response.status(404);
-            response.send("The game id was not found!");
+            return response.status(404).send("The game id format is unsupported!");
         }
 
-        return response.json(scores);
+        return response.json(questions);
     },
 
     async create(request, response) {
@@ -30,7 +29,7 @@ module.exports = {
                 }, ['id']);
 
                 return response.json(id);
-                
+
             } catch(error) {
                 return response.status(500).send(`Something went wrong, it was not possible to insert 
                                                   the question. Make sure the text is unique to this game. \n Err: ${error}`);
