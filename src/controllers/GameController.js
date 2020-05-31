@@ -16,11 +16,8 @@ module.exports = {
 
     async create(request, response) {
         const { name, link, tags } = request.body;
-        
-        let id;
 
-        // try {  
-        connection('games').insert({ name, link }).then(id => {
+        connection('games').insert({ name, link }).then(res => {
             try {  
                 tags.forEach(async (tag) => { 
                     await tagService.addTagForGame(id, tag) 
@@ -31,6 +28,8 @@ module.exports = {
             }
 
             return response.json({ id });
+        }).catch(error => {
+            return response.json({error});
         })
     }
 }
