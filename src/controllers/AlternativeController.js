@@ -37,6 +37,19 @@ module.exports = {
         } else {
             response.status(500).send("Something is wrong with the isCorrect flag");
         }
+    },
+
+    async delete(request, response) {
+        const { alternativeId } = request.params;
+
+        try {
+            await connection('alternatives').where('id', alternativeId).delete();
+        } catch(error) {
+            return response.status(500).send(`Something went wrong, it was not possible to delete the alternative. 
+                                              \n Err: ${error}`)
+        }
+
+        return response.status(204).send();
     }
 }
 

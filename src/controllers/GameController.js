@@ -35,5 +35,18 @@ module.exports = {
             return response.status(500).send(`Something went wrong, it was not possible to insert
                                               the game. Make sure link and name are unique. \n Err: ${error}`);
         }
+    },
+
+    async delete(request, response) {
+        const { gameId } = request.params;
+
+        try {
+            await connection('games').where('id', gameId).delete();
+        } catch(error) {
+            return response.status(500).send(`Something went wrong, it was not possible to delete the game. 
+                                              \n Err: ${error}`)
+        }
+
+        return response.status(204).send();
     }
 }

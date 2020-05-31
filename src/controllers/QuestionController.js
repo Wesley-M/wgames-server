@@ -37,6 +37,19 @@ module.exports = {
         } else {
             return response.status(500).send('difficulty value from question is not in range [1, 5]');
         }
+    },
+
+    async delete(request, response) {
+        const { questionId } = request.params;
+
+        try {
+            await connection('questions').where('id', questionId).delete();
+        } catch(error) {
+            return response.status(500).send(`Something went wrong, it was not possible to delete the question. 
+                                              \n Err: ${error}`)
+        }
+
+        return response.status(204).send();
     }
 }
 
