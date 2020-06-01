@@ -2,7 +2,7 @@ const connection = require('../database/connection')
 
 const tagService = require('../services/TagService')
 
-const normalizer = require('./utils/Normalizer')
+const normalizer = require('./utils/Normalizer').default
 
 module.exports = {
     async index(request, response) {

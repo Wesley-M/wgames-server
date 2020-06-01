@@ -1,4 +1,4 @@
-export default class Normalizer {
+class Normalizer {
     static replaceBySpace (text) {
         return text.replace(/(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g," ");
     }
@@ -30,3 +30,5 @@ export default class Normalizer {
     }
 
 }
+
+module.exports = Normalizer;
