@@ -2,7 +2,7 @@
 exports.up = function(knex) { 
   return knex.schema.createTable('scores', function(table) {
     table.increments().primary();
-    table.integer('gameId').unsigned().notNullable();
+    table.string('gameId').notNullable();
     table.string('name').notNullable();
     table.integer('value').notNullable();
 

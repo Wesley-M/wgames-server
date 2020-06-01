@@ -1,11 +1,11 @@
 
 exports.up = function(knex) {
   return knex.schema.createTable('games', function(table) {
-    table.increments().primary();
+    table.string('id', 50).primary();
     table.string('name').notNullable(); 
     table.string('link', 2048).notNullable();
     
-    table.unique(['name', 'link']);
+    table.unique(['link']);
   })
 };
 
