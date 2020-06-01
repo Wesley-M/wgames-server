@@ -20,12 +20,12 @@ class Normalizer {
     }
 
     static normalize(text) {
-        text = CampaignURLGenerator.replaceBySpace(text);
-        text = CampaignURLGenerator.replaceAccents(text);
-        text = CampaignURLGenerator.replaceUpperCase(text);
-        text = CampaignURLGenerator.replaceMultipleSpaces(text);
+        text = Normalizer.replaceBySpace(text);
+        text = Normalizer.replaceAccents(text);
+        text = Normalizer.replaceUpperCase(text);
+        text = Normalizer.replaceMultipleSpaces(text);
         text = text.trim();
-        text = CampaignURLGenerator.replaceSpaceByHiphen(text);
+        text = Normalizer.replaceSpaceByHiphen(text);
         return text;
     }
 
