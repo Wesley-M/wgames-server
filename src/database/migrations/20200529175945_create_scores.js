@@ -5,6 +5,7 @@ exports.up = function(knex) {
     table.string('gameId').notNullable();
     table.string('name').notNullable();
     table.integer('value').notNullable();
+    table.timestamp("created_at").notNullable().defaultTo(knex.fn.now());
 
     table.foreign('gameId').references('id').inTable('games').onDelete('CASCADE');
   })

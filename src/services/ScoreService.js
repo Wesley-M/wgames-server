@@ -1,3 +1,4 @@
+const moment = require('moment');
 const connection = require('../database/connection')
 
 module.exports = {
@@ -11,7 +12,15 @@ module.exports = {
         }
 
         // Sorting scores in descending order
-        const orderedScores = scores.sort((sc1, sc2) => sc1.value - sc2.value).reverse();
+        const orderedScores = scores.sort((scoreA, scoreB) => {
+            if (scoreA.value != scoreB.value) {
+                return scoreB.value - scoreA.value;
+            } else {
+                let timestampA = moment(scoreA.created_at).valueOf();
+                let timestampB = moment(scoreB.created_at).valueOf();
+                return timestampA - timestampB;
+            }
+        });
 
         return orderedScores;
     },
